@@ -1,23 +1,36 @@
 import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import { useHref } from 'react-router-dom';
+import axios from 'axios';
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <br></br><br></br>
+
+      <p className="h2">Welcome To Nothing Bank</p>
+
+      <small className="text-muted">I am your manager. How can I help you?</small>
+
+      <br></br><br></br>
+
+      <a href='CreateAccount'><button className="btn btn-primary">Create Account</button></a>
+
+      <br></br><br></br>
+
+      <a href='DepositeMoney'><button className="btn btn-primary">Deposit Money</button></a>
+
+      <br></br><br></br>
+
+      <a href='SendMoney'><button className="btn btn-primary">Send Money</button></a>
+
+      <br></br><br></br>
+
+      <a href='UserInfo'><button className="btn btn-primary">User Information</button></a>
+
     </div>
   );
 }

@@ -3,15 +3,51 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import CreateAccount from './pages/CreateAccount';
+import SendMoney from './pages/SendMoney';
+import UserInfo from './pages/UserInfo';
+import DepositeMoney from './pages/DepositeMoney';
+import ShowInfo from './pages/ShowInfo';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>,
+  },
+  {
+    path: "CreateAccount",
+    element: <CreateAccount/>,
+  },
+  {
+    path: "SendMoney",
+    element: <SendMoney/>,
+  },
+  {
+    path: "UserInfo",
+    element: <UserInfo/>,
+  },
+  {
+    path: "DepositeMoney",
+    element: <DepositeMoney/>,
+  },
+  {
+    path: "showInfo",
+    element: <ShowInfo/>,
+  },
+  
+]);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />   
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// I make some changes here to setup react router
+// line 8 - 9
+// linr 19 
+
 reportWebVitals();
