@@ -1,8 +1,10 @@
 import { eventWrapper } from "@testing-library/user-event/dist/utils";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ShowInfo from "./ShowInfo";
 
-function UserInfo() {
+let okk = false;
+
+function UserInfo() { 
 
   const [user, setUser] = useState();
   const [number, setNumber] = useState();
@@ -16,9 +18,9 @@ function UserInfo() {
     setNumber(event.target.value);
   }
 
-
   const ok = () => {
-    
+    okk = true;
+    console.log('ok');
     if (localStorage.getItem(user)) {
       const person = JSON.parse(localStorage.getItem(user));
       // const person = localStorage.getItem(user);
@@ -34,39 +36,39 @@ function UserInfo() {
       // console.log(person);
       
 
-    }
+    }  
     else {
       alert('Not a user');
     }
   }
 
-  return (
+  return ( 
        <>
         <div className="account-form">
         <form>
 
-          <div>
-            <input class="form-control" type="text" onChange={userName} value={user} placeholder="Account's Name" />
+          <div>   
+            <input className="form-control" type="text" onChange={userName} value={user} placeholder="Account's Name" />
           </div>
 
               <br/>
           
           <div>
-            <input class="form-control" type="text" onChange={userNum} value={ number } placeholder="Mobile Number" />
+            <input className="form-control" type="text" onChange={userNum} value={ number } placeholder="Mobile Number" />
           </div>
-
+  
               <br/>
           
           <div className="App">
-           <button type="button" class="btn btn-dark" onClick ={ok} >Show Info</button>
-          </div>
-
-        </form>
-        
-      </div>
+           <button type="button" className="btn btn-dark" onClick ={ok} >Show Info</button>
+          </div> 
+          
+        </form>         
+          
+      </div> 
       {
-        (showUser) ? document.write(showUser) : null
-      }
+        (okk) ? (okk = false, document.write(showUser)) : null
+      }     
       </>
     )
 }

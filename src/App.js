@@ -31,6 +31,10 @@ function App() {
 
       <a href='UserInfo'><button className="btn btn-primary">User Information</button></a>
 
+      <br></br><br></br>
+
+      <a href='UserList'><button className="btn btn-primary">User List</button></a>
+
     </div>
   );
 }

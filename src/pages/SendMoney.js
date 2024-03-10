@@ -172,7 +172,7 @@ function SendMoney() {
                 <br/>
           
           <div>
-            <input class="form-control" type="text" onChange={moneyAmount} value={amount} placeholder="Amount" />
+            <input className="form-control" type="text" onChange={moneyAmount} value={amount} placeholder="Amount" />
           </div>
 
                 <br/>

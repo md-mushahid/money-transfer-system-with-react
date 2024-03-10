@@ -25,8 +25,8 @@ function DepositeMoney() {
 
   const ok = () => {
     
-    const t_name = name;
-    const t_number = number;
+    const t_name = name.trim();
+    const t_number = number.trim();
     const t_amount = amount;
     //const t_currency = currency;
 
@@ -35,7 +35,7 @@ function DepositeMoney() {
       const person = JSON.parse(localStorage.getItem(t_name));
       localStorage.removeItem(t_name);
 
-      if (person.userNumber === t_number) {
+      if (person.userNumber == t_number) {
 
         const lastAmount = Number(person.amount);
 

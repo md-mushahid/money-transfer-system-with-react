@@ -9,7 +9,8 @@ import SendMoney from './pages/SendMoney';
 import UserInfo from './pages/UserInfo';
 import DepositeMoney from './pages/DepositeMoney';
 import ShowInfo from './pages/ShowInfo';
-
+import UserList from './pages/UserList';
+ 
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
     path: "showInfo",
     element: <ShowInfo/>,
   },
+  {
+    path: "UserList",
+    element: <UserList/>,
+  },
+  
   
 ]);
 

@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from 'react-dom/client';
 import axios from "axios";
 
+let lastCurrency = 'Choose Currency';
+
 function CreateAccount() {
 
   // const countryList = ['BDT', 'USD', 'EUR', 'INR', 'JPY', 'OMR', 'PKR', 'RSD'];
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [currency, setCurrency] = useState('');
+  const [currency, setCurrency] = useState(lastCurrency);
   const [initial, setInitial] = useState('');
 
   const changeName = event => {
@@ -27,18 +29,85 @@ function CreateAccount() {
     setInitial(event.target.value);
   }
 
-  const userName = name;
-  const userNumber = number;
+  const userName = name.trim();
+  const userNumber = number.trim();
   const userCurrency = currency;
   const userInitial = Number(initial);
+
+  // console.log(typeof userName, userName);
 
   // const [currencyOptions, setCurrencyOptions] = useState({})
   
   function ok() {
-    if (!userCurrency) {
+
+// ============================== USER NAME =================================================
+
+    if (userName) {
+
+      console.log('ok', userName);
+      const len = userName.length;
+      for (let i = 0; i < len; i++){
+        if (userName[i] === " " && userName[i + 1] === " ") {
+          alert('Please Do Not Add Extra Space');
+          return;
+        }
+        else {
+          for (let j = 0; j < 10; j++){
+            if (userName[i] == j) {
+              alert('You can not use number in user name');
+              return;
+            }
+          }
+        }
+      }
+      console.log(len);
+    }
+    else {
+      alert('Please Give an User Name');
+      return;
+    }
+
+    // ================================ Currency =============================================
+    
+    if (!userCurrency || userCurrency == 'Choose Currency') {
       alert('You Have to Choose a Currency');
       return;
     }
+
+    if (userInitial < 0) {
+      alert('Please Enter Positive Amount to deposite');
+      return;
+    }
+    // ==================================== NUMBER ==================================================
+    
+    if (userNumber) {
+      var keys = Object.keys(localStorage);
+      let ok1 = true;
+      keys.map(value => {
+        const person = JSON.parse(localStorage.getItem(value));
+        if (person['userNumber'] == userNumber){
+          ok1 = false;
+        }
+      })
+
+      if (ok1 === false) {
+        alert('An Account is already creted with this number Pleast try with a diffrent number');
+        return;
+      }
+
+      let len = userNumber.length;
+      for (let i = 0; i < len; i++){
+        if (!(userNumber[i] == '0' || userNumber[i] == '1' || userNumber[i] == '2' || userNumber[i] == '3' || userNumber[i] == '4' || userNumber[i] == '5' || userNumber[i] == '6' || userNumber[i] == '7' || userNumber[i] == '8' || userNumber[i] == '9')) {
+          alert('Please Give Only digit in Number section');
+          return;
+        }
+      }
+    }
+    else {
+      alert('You have to give a number');
+      return;
+    }
+    //=====================================
     console.log(userName, userNumber, userCurrency, userInitial);
 
     let description;
@@ -60,22 +129,23 @@ function CreateAccount() {
       }
     }
     
-    if (!localStorage.getItem(name)) {
-      
-      localStorage.setItem(name, JSON.stringify(person));
-    
+    if (!localStorage.getItem(userName)) {
+      localStorage.setItem(userName, JSON.stringify(person));
+      lastCurrency = currency;
       alert("Account is created");
       setName('');
       setNumber('')
-      setCurrency('');
+      setCurrency(lastCurrency);
       setInitial('');
+
     }
     else {
       alert('This User Name is taken');
     }
   }
 
-    return (
+  return (
+      <>
       <div className="account-form">
         <form>
 
@@ -92,7 +162,7 @@ function CreateAccount() {
               <br/>
           
           <div>
-            <input className="form-control" type="number" onChange={changeInitial} value={initial} placeholder="Initial Saving" />
+            <input className="form-control" type="text" onChange={changeInitial} value={initial} placeholder="Initial Saving" />
           </div>
               
           <br/>
@@ -119,6 +189,7 @@ function CreateAccount() {
 
         </form>
       </div>
+</>
     );
 }
 
